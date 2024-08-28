@@ -80,3 +80,24 @@ void execute_command(char *command)
 
     free(argv);  /* Free allocated memory */
 }
+/**
+ * fork_and_exec - Forks a new process and executes a command
+ * @command_path: The full path to the command
+ * @argv: The arguments to the command
+ */
+void fork_and_exec(char *command_path, char **argv)
+{
+    pid_t pid = fork();
+    if (pid == -1) {
+        perror("fork");
+    } else if (pid == 0) {
+        /* Child process */
+        if (execve(command_path, argv, environ) == -1) {
+            perror("./hsh");
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        /* Parent process */
+        wait(NULL);
+    }
+}

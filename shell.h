@@ -29,7 +29,7 @@ void prompt(void);
 /* execute_command.c */
 void execute_command(char *command);
 char *find_executable(char *command_path);
-
+void fork_and_exec(char *command_path, char **argv);
 /* utility.c */
 char **tokenize(char *command);
 void free_tokens(char **tokens);
