@@ -1,0 +1,13 @@
+#include "builtin_exit.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+void builtin_exit(char *args[]) {
+    if (args[1] != NULL) { // If there's an argument
+        int status = atoi(args[1]); // Convert argument to integer
+        exit(status); // Exit with the specified status
+    } else {
+        exit(0); // Exit with status 0 if no argument is provided
+    }
+}

@@ -1,0 +1,33 @@
+#include "shell.h"
+
+/**
+ * main - Entry point of the simple shell
+ *
+ * Return: Always 0 (Success)
+ */
+int main(void)
+{
+    char *command = NULL;
+    size_t len = 0;
+    ssize_t nread;
+
+    while (1)
+    {
+        prompt();
+        nread = getline(&command, &len, stdin);
+
+        if (nread == -1)  /* Handle Ctrl+D */
+        {
+            free(command);
+            break;
+        }
+
+        if (nread > 1)  /* Ignore empty commands */
+        {
+            command[nread - 1] = '\0';  /* Remove newline character */
+            execute_command(command);
+        }
+    }
+
+    return 0;
+}
